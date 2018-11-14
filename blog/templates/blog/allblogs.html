@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Mileidy's Jobs</title>
+    <title>Mileidy's Blog</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -17,21 +17,21 @@
   <body>
 
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+	 <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="{% url 'home' %}">Mileidy Tacuri</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="https://twitter.com/Milebet" target="_blank?">Twitter</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% static 'cvmileidy.pdf' %}">Resume</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'allblogs' %}">Blog</a>
+              <a class="nav-link active" href="{% url 'allblogs' %}">Blog</a>
             </li>
           </ul>
         </div>
@@ -39,36 +39,21 @@
     </header>
 
     <main role="main">
-
-      <section class="jumbotron text-center">
-        <div class="container">
-          <h1 class="jumbotron-heading">Hi I'm Mileidy</h1>
-          <p class="lead text-muted">I am Mileidy and I am trying to try this django framework. I thoght it was similar to Rails but it is semm that I was a bit wrong about it</p>
-          <p>
-            <a href="mailto: milebet.tacuri@gmail.com" class="btn btn-primary my-2">Email me</a>
-          </p>
-          <img src="{%static 'mile.JPG'%}" height="300" />
-        </div>
-      </section>
-
-      <div class="album py-5 bg-light">
-        <div class="container">
-
-          <div class="row">
-          {% for job in jobs.all %}
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                <img class="card-img-top" src="{{job.image.url }}" />
-                <div class="card-body">
-                  <p class="card-text">{{ job.summary }}</p>
-                </div>
-              </div>
-            </div>
-          {% endfor %}
-          </div>
-        </div>
+      <div class="container">
+      	<h1 class="text-center pt-3">Welcome to Mileidy's blog</h1>
+      	<br/>
+      	<br/>
+      	<h2>Latest Posts</h2>
+      	<hr/>
+      	{% for blog in blogs.all %}
+      		<a href="{% url 'detail' blog.id %}"><h1>{{blog.title}}</h1></a>
+      		{{blog.pub_date_pretty}}
+      		<br />
+      		<img class="img-fluid" src="{{blog.image.url}}" height="200" width="200" />
+      		<br />
+      		<p>{{blog.summary}}</p>
+      	{% endfor %}
       </div>
-
     </main>
 
     <footer class="text-muted">
